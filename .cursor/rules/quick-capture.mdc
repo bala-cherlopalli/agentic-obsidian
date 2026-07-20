@@ -1,0 +1,26 @@
+---
+description: "When the user says 'quick' followed by text, create a Quick Capture note in the vault"
+alwaysApply: true
+---
+
+# Quick Capture Command
+
+When the user's message starts with "qqq", "quick", or "quick:" followed by text, **only capture — do not organize**.
+
+1. Create a note at `Quick Capture/YYYY-MM-DD — <short descriptive title>.md` using today's date
+2. Use this format:
+
+```markdown
+---
+created: "YYYY-MM-DD"
+tags: []
+---
+
+# <Short descriptive title>
+
+<user's captured text>
+```
+
+3. Confirm what was captured. That's it — don't move it, don't process it, don't touch daily notes.
+
+The note stays in `Quick Capture/` until the user runs **organize**.

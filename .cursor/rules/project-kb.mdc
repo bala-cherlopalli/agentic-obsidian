@@ -1,0 +1,30 @@
+---
+description: "Build and maintain project knowledge bases from external source projects"
+alwaysApply: true
+---
+
+# Project Knowledge Bases
+
+Use this rule when the user says `kb sync`, `kb build`, `kb refresh`, or asks to update a project knowledge base from an external project folder.
+
+## Registry
+
+- Use `Work/Project Registry.md` as the source of truth for mappings.
+- Each mapping connects an external source path to a vault KB folder, usually `Work/<Project>/`.
+- Do not create a new mapping unless the user provides the source path or explicitly asks for it.
+
+## Sync behavior
+
+- Read source files selectively. Prefer README files, docs, specs, package manifests, route/API definitions, schemas, and high-signal source files.
+- Include chat-history sources such as `.specstory/history/` when they contain requirements, decisions, rationale, or user preferences.
+- Ignore generated files, dependency folders, build outputs, binary assets unless they are important source artifacts, and anything likely to contain secrets.
+- Extract durable knowledge: purpose, vocabulary, modules, workflows, APIs, data models, decisions, setup commands, risks, and open questions.
+- Write concise Obsidian notes in the mapped KB folder. Link related notes with `[[wikilinks]]`.
+- Preserve existing user-written KB content. Append or revise targeted sections rather than replacing whole notes.
+
+## Safety
+
+- Never copy secrets, tokens, credentials, `.env` values, or private customer data into the vault.
+- Prefer summaries and source references over large copied code blocks.
+- Summarize chat transcripts; do not paste full conversations into KB notes.
+- Report source files that look important but were skipped due to size, binary format, or ambiguity.

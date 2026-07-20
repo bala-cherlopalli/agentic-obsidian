@@ -1,0 +1,92 @@
+---
+description: "When the user says 'organize', process all Quick Capture notes"
+alwaysApply: true
+---
+
+# Organize Command
+
+When the user's message is "ooo", "organize" (or "organize my notes", "run organize", etc.):
+
+1. Read all notes in `Quick Capture/`
+2. Check the vault root for any orphaned `.md` files that aren't `Home.md`, `TODOs - Personal.md`, or `TODOs - Work.md` — treat those as captures too
+3. For each note, **ask yourself**: does this belong in today's daily note, or somewhere specific?
+
+## Default: daily note
+
+By default, append the capture to the daily note for that capture's date at `Daily Notes/YYYY-MM-DD.md`:
+- Append the text under `## Notes`
+- Scan for actionable items and add `- [ ]` checkboxes under the appropriate section:
+  - `### Personal` for personal tasks
+  - `### Work` for work tasks
+- Delete the Quick Capture file after processing
+
+If the daily note doesn't exist yet, create it:
+```markdown
+---
+created: "YYYY-MM-DD"
+tags:
+  - daily
+---
+
+# YYYY-MM-DD
+
+## Tasks
+
+### Personal
+- 
+
+### Work
+- 
+
+## Notes
+
+```
+
+## Exception: specific note
+
+Do NOT put in the daily note if the user has explicitly said it belongs somewhere else. In that case:
+- Append to an existing note the user specified, OR
+- Create a new standalone note in `Personal/` or `Work/`
+
+The user will tell you when this applies. If they haven't said anything, default to daily note.
+
+## Project subfolders
+
+For larger projects, use one shallow project folder under `Work/` or `Personal/`, such as `Work/ILS/` or `Work/RDR/`.
+
+- Honor an existing project folder when the capture clearly belongs there.
+- Create a new project folder only when the user asks, or when there are multiple related standalone notes for the same project.
+- Do not create nested project folders deeper than one level.
+- Keep quick tasks in the daily note unless they are specific to an existing project note.
+- If creating a standalone task note for a project, place it in that project folder.
+
+## Assets and resources
+
+When organizing, also check for root-level assets such as images, PDFs, spreadsheets, and other resource files.
+
+- Do not leave assets in the vault root.
+- If an asset is embedded in or clearly related to a project note, move it to that project's `assets/` folder, e.g. `Work/ILS/assets/`.
+- If an asset is shared or its context is unclear, move it to a top-level `Assets/` folder and report it as ambiguous.
+- Preserve or update Obsidian embeds/links so notes still resolve after the move.
+
+## Long-running tasks
+
+If a capture is clearly a long-running working item (no deadline, ongoing effort), create a standalone task note in `Personal/` or `Work/` using `Templates/Task.md` with:
+```yaml
+area: "personal" or "work"
+category: "working"
+done: false
+tags: [task]
+```
+
+**Important — Tasks plugin compatibility:**
+- The checkbox line in the standalone note MUST include an inline `#task` tag (e.g. `- [ ] Task description #task`). The Tasks plugin `tag includes task` query does not read frontmatter tags — it only matches inline tags on the task line itself.
+- Do NOT add a duplicate task to the daily note. Working tasks live only in the standalone note so they appear in the **Working** section of the TODOs view, not in the **Quick** section.
+
+## Report
+
+After organizing, report:
+- Notes processed
+- Where each one landed (daily note / specific note / standalone task)
+- Tasks extracted
+- Anything ambiguous — ask the user

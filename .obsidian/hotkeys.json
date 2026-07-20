@@ -1,0 +1,10 @@
+{
+  "file-explorer:new-file": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "N"
+    }
+  ]
+}

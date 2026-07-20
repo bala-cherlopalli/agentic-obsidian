@@ -1,0 +1,13 @@
+# Obsidian workspace (local UI state, changes constantly)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Obsidian plugin caches
+.obsidian/plugins/*/data.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Trash
+.trash/

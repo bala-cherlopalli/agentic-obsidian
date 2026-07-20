@@ -1,0 +1,37 @@
+---
+description: "When the user says 'review', run a vault health check and surface open tasks"
+alwaysApply: true
+---
+
+# Review Command
+
+When the user's message is "review" (or "review my vault", "run review", "how's my vault", etc.):
+
+1. Count notes in each folder (Daily Notes, Quick Capture, Personal, Work, Archive)
+2. List any notes in Quick Capture (need organizing)
+3. Read all daily notes and list open tasks (`- [ ]`) grouped by Personal and Work
+4. Read all standalone task notes (tagged `task`, `done: false`) and list them
+5. Flag any quick tasks that are overdue
+6. Flag any working tasks not modified in 14+ days
+
+Output format:
+
+```
+Daily Notes:    X notes
+Quick Capture:  X notes (need organizing)
+Personal:       X notes
+Work:           X notes
+Archive:        X notes
+
+Open Tasks — Personal:
+  - [ ] task from [[daily note or task note]]
+
+Open Tasks — Work:
+  - [ ] task from [[daily note or task note]]
+
+Overdue / Stale:
+  - task details
+
+Needs attention:
+  - anything else
+```

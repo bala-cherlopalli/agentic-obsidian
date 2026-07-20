@@ -1,0 +1,55 @@
+---
+description: "Overview of the Obsidian vault structure, conventions, and how the agent should operate"
+alwaysApply: true
+---
+
+# Vault Overview
+
+This is an Obsidian second brain managed primarily through Cursor (AI agent). The user captures notes by talking to the agent. The agent organizes, extracts tasks, and maintains the vault.
+
+## Folder Structure
+
+| Folder | Purpose |
+| --- | --- |
+| `Quick Capture/` | Temporary landing zone. Notes arrive here first, get processed on organize. |
+| `Daily Notes/` | One note per day (`YYYY-MM-DD.md`). Quick captures and tasks default here. |
+| `Personal/` | Personal life — long-running tasks, standalone notes, ideas. |
+| `Work/` | Work — long-running tasks, standalone notes, projects. |
+| `Archive/` | Processed captures, completed items, old notes. |
+| `Templates/` | Note, Project, Daily, Task templates. |
+| `.cursor/Skills/` | Agent instructions for Organize and Review workflows. |
+| `.cursor/Prompts/` | Saved reusable AI prompts. |
+| `.cursor/rules/` | Agent rules (this file and command shortcuts). |
+
+Assets and resources should not live in the vault root. Put project-specific files in an `assets/` folder inside the project folder, e.g. `Work/ILS/assets/`. Use a top-level `Assets/` folder only for shared or unclassified resources.
+
+## Shortcuts
+
+| User types | Agent does |
+| --- | --- |
+| `qqq <text>` | Create a note in `Quick Capture/` — capture only, don't organize. |
+| `ooo` | Organize: process all `Quick Capture/` notes into daily notes, extract tasks. |
+| `review` | Vault health check — count notes, list open tasks, flag stale items. |
+
+## Task format
+
+Tasks use the **Tasks plugin emoji format** inside markdown checkboxes:
+
+```
+- [ ] Task description 📅 2026-02-24
+- [ ] Urgent task ⏫ 📅 2026-02-24
+- [x] Done task ✅ 2026-02-23
+```
+
+Emoji: `📅` due, `⏳` scheduled, `🛫` start, `⏫` high priority, `🔼` medium, `🔽` low, `✅` done.
+
+## Key rules
+
+1. **Capture and organize are separate steps.** `qqq` only captures. `ooo` organizes.
+2. **Daily note is the default destination.** Quick tasks and captures go to `Daily Notes/YYYY-MM-DD.md` unless the user says otherwise.
+3. **Standalone notes only when needed.** Long-running working items get their own note in `Personal/` or `Work/`. Everything else stays in the daily note.
+4. **Append, never overwrite.** Daily notes accumulate throughout the day.
+5. **Use shallow project folders when useful.** Larger projects may live under one extra level, e.g. `Work/ILS/` or `Work/RDR/`. Honor existing project folders when organizing.
+6. **Organize assets with their context.** Images, PDFs, and other resources go beside the note/project they support, usually in a project `assets/` folder.
+7. **Don't over-organize.** Keep it simple — Personal or Work first, then only one shallow project folder for substantial projects. Don't invent categories for one-off notes.
+8. **Tasks plugin powers TODO views.** `TODOs - Personal.md` and `TODOs - Work.md` use `tasks` query blocks to show individual checkboxes across the vault.
