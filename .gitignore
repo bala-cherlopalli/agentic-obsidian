@@ -12,6 +12,7 @@
 
 # Vault trash (local)
 .trash/
+.history/
 
 # OS files
 .DS_Store
